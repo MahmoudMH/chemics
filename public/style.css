@@ -1,1 +1,21 @@
+html {
+    background:url('./slide1.jpg');
+    background-size:cover;
+    height:100vh;
+}
 
+/*.header .intro {padding-top:50px;text-align:center;color:#FFF; text-align: center;}*/
+
+.header .intro button {
+  border: none;
+    color: white;
+    font-size: 20px;
+    padding: 15px 10px;
+    background-color: rgba(1,1,1,0.8);
+    font-family: 'Spectral SC', serif;
+    cursor: pointer;
+
+}
+.header .intro text {
+
+}
