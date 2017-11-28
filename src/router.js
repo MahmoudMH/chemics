@@ -2,15 +2,19 @@ const fs = require('fs');
 const path = require('path');
 const router = (request , response) => {
   var url = request.url;
+  console.log('here',url);
   if( url === '/alchemy'){
     var allTheData = '';
   request.on('data', function (chunkOfData) {
+    var textChunk = chunkOfData.toString('utf8');
+
       allTheData += chunkOfData;
+      console.log(typeof textChunk);
   });
 
   request.on('end', function () { });
   response.end();
-});
+}
 
   else if(url === '/'){
       fs.readFile(path.join(__dirname,'..','public','index.html'),(error, file)=>{
