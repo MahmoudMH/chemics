@@ -1,14 +1,26 @@
 var input = document.getElementById('input');
-console.log('ibefef',input);
-input.addEventListener('input', function() {
+var response = {};
+var form = document.getElementById('search');
+var div = document.getElementById('search-menu');
+input.addEventListener('keyup', function() {
   var name = input.value;
-  console.log('name',name);
   var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
-  if(xhr.readyState == 4 && xhr.status == 200) {
-    var response = xhr.responseText;
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      response = JSON.parse(xhr.responseText);
+    }
+    for (var i in response) {
+      let anchor = document.createElement('a');
+      anchor.innerHTML = response[i].name +", "+ response[i].atomic_mass;
+      div.appendChild(anchor);
+    }
+
   }
-}
-    xhr.open("POST", "/alchemy");
-    xhr.send(name);
+  xhr.open("POST", "/alchemy");
+  xhr.send(name);
+
+
+
+
+
 });
