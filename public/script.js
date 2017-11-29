@@ -5,9 +5,11 @@ input.addEventListener('keyup', function() {
   var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
   if(xhr.readyState == 4 && xhr.status == 200) {
-    var response = JSON.stringify(xhr.responseText);
-    console.log('response',response);
+    var response = JSON.parse(xhr.responseText);
+    console.log('response',typeof response);
+
   }
+
  }
     xhr.open("POST", "/alchemy");
     xhr.send(name);
