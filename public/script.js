@@ -14,6 +14,7 @@ input.addEventListener('keyup', function() {
         let anchor = document.createElement('a');
         anchor.innerHTML = response[i].name + ", " + response[i].atomic_mass;
         anchor.setAttribute('href',response[i].source);
+        anchor.setAttribute('target','_blank');
         // anchor.setAttribute('ac')
         div.appendChild(anchor);
       }
