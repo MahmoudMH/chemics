@@ -10,18 +10,20 @@ input.addEventListener('keyup', function() {
       response = JSON.parse(xhr.responseText);
       console.log('response: ', response);
       div.innerHTML = '';
-      let anchor = document.createElement('a');
+      var anchor = document.createElement('a');
+
       for (var i in response) {
         anchor.innerHTML = response[i].name + ", " + response[i].atomic_mass;
         anchor.setAttribute('href', response[i].source);
         anchor.setAttribute('target', '_blank');
         div.appendChild(anchor);
       }
+
       anchor.addEventListener('mouseover', function() {
         let elmentObject = response[i];
         console.log('Hover');
         var div = document.createElement('div');
-        div.setAttribute('class', 'comment-box');
+        div.setAttribute('id', 'comment-box');
         var p = document.createElement('p');
         p.innerHTML = 'Elment name: ' + elmentObject.name + '<br>' +
         'Appearance: ' + elmentObject.appearance + '<br>' +
@@ -32,9 +34,14 @@ input.addEventListener('keyup', function() {
         div.appendChild(p);
         document.getElementsByTagName('body')[0].appendChild(div);
       });
+
       anchor.addEventListener('mouseout', function() {
-        document.getElementsByClassName('comment-box').innerHTML = '';
+        console.log('unhover');
+        const element = document.getElementById("comment-box");
+        element.parentNode.removeChild(element);
       });
+
+
       div.style.visibility = 'visible';
       if (input.value == '') {
         div.innerHTML = '';

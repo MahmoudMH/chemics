@@ -37,3 +37,9 @@ form div {
   background-color: rgba(54, 43, 33, 0.4);
   visibility: hidden;
 }
+
+p {
+  display: flex;
+  flex-wrap:wrap;
+  width: 350px;
+}
