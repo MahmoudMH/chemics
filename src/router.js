@@ -5,6 +5,7 @@ const router = (request , response) => {
   if( url === '/alchemy'){
     var input = '';
     var nameElm = [];
+    var ret = [];
   request.on('data', function (chunkOfData) {
     var textChunk = chunkOfData.toString('utf8');
       input += textChunk;
@@ -16,12 +17,19 @@ const router = (request , response) => {
             response.writeHead(500,'content-Type: text/html');
             response.end('<h1>internal server Error</h1>');
           }
-          var elements = JSON.parse(JSON.stringify(file));
-          // for(var i in elements[0]){nameElm.push(elements[0][i].name);}
+          var elements = JSON.parse(file);
+          for(var i in elements.elements){nameElm.push(elements.elements[i].name);}
+          for(var i in nameElm){
+
+              if(nameElm[i].toLowerCase().indexOf(input.toLowerCase()) !== -1) {
+               ret.push(nameElm[i]);
+
+          }}
+          console.log('ss',ret);
           // for (var i = 0; i < elements[0].length; i++) {
           //   nameElm.push(elements[0][i].name);
           // }
-          console.log('sssd',elements.elements[1].name);
+          // console.log('sssd',nameElm);
 
             // const elements = JSON.parse(JSON.stringify(file)).elements;
             // var ret = [];
@@ -30,12 +38,13 @@ const router = (request , response) => {
             // ret.push(elements[i]);
             // }
             // }
-            console.log('sssss',JSON.parse(file));
-            response.end();
+            //
+            response.writeHead(200,'content-Type: text/html');
+            response.end(JSON.stringify(ret));
 
         });
   });
-  response.end();
+  // response.end();
 }
 
   else if(url === '/'){
