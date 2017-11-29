@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const router = (request, response) => {
   var url = request.url;
-  if (url === '/alchemy') {
+  if (url === '/chemics') {
     var input = '';
     var nameElm = [];
     var ret = [];
@@ -17,32 +17,21 @@ const router = (request, response) => {
           response.writeHead(500, 'content-Type: text/html');
           response.end('<h1>internal server Error</h1>');
         }
-        // var elements = JSON.parse(file);
-        // for(var i in elements.elements){
-        //   nameElm.push(elements.elements[i].name);
-        // }
-        // for(var i in nameElm){
-        //
-        //     if(nameElm[i].toLowerCase().indexOf(input.toLowerCase()) !== -1) {
-        //      ret.push(nameElm[i]);
-        //
-        // }}
-        // console.log('ss',ret);
-        // for (var i = 0; i < elements[0].length; i++) {
-        //   nameElm.push(elements[0][i].name);
-        // }
-        // console.log('sssd',nameElm);
         const elements = JSON.parse(file).elements;
         var ret = [];
         let limit = 0;
-        for (var i = 0; i < elements.length && limit < 8; i++) {
-          if (elements[i].name.toLowerCase().indexOf(input.toLowerCase()) !== -1) {
-            ret.push(elements[i]);
-            limit++;
-            console.log(elements[i].name);
-          }
-        }
+        // elements.forEach(function(elements[i]) {
         //
+        // });
+        for(var i=0; i<elements.length; i++) {
+          elements[i].name = elements[i].name.toLowerCase();
+            if (elements[i].name.includes(input.toLowerCase())) {
+              ret.push(elements[i]);
+              limit++;
+              console.log(limit,'.',elements[i].name);
+            }
+            if(limit==7) break;
+        }
         response.writeHead(200, 'content-Type: text/html');
         response.end(JSON.stringify(ret));
 
